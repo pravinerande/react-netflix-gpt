@@ -19,6 +19,9 @@ const Login = () => {
         />
       </div>
       <form className="absolute w-4/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 p-8 my-8 rounded-md">
+        <h2 className="text-3xl font-bold mb-8 text-white">
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </h2>
         {!isSignInForm && (
           <input
             type="text"
@@ -26,10 +29,6 @@ const Login = () => {
             className="w-full py-3 mb-8 rounded bg-gray-800 text-white"
           />
         )}
-
-        <h2 className="text-3xl font-bold mb-4 text-white">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h2>
         <input
           type="email"
           placeholder="Email or phone number"
