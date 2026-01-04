@@ -12,16 +12,13 @@ export const USER_DUMMY_NAME = "Random User";
 
 export const TMDB_API_URL = "https://api.themoviedb.org/3";
 
+export const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+export const TMDB_API_TOKEN = process.env.REACT_APP_TMDB_API_TOKEN;
+
 export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer " +
-      "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTJkMWU4NDYwNDFkMGU4ODE1NTJkNmEwMTY3NTU3MSIsIm5iZiI6MTc2NzUyMTQxNy4xNDIwMDAyLCJzdWIiOiI2OTVhM2M4OTNjNzM0YmRlNzdjM2E2NTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.6jK3uY36I7xhbDHYLJqsB1FWeAk8rwyzYx1O32UyGNQ",
+    Authorization: "Bearer " + TMDB_API_TOKEN,
   },
 };
-
-export const TMDB_API_KEY = "392d1e846041d0e881552d6a01675571";
-export const TMDB_API_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTJkMWU4NDYwNDFkMGU4ODE1NTJkNmEwMTY3NTU3MSIsIm5iZiI6MTc2NzUyMTQxNy4xNDIwMDAyLCJzdWIiOiI2OTVhM2M4OTNjNzM0YmRlNzdjM2E2NTciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.6jK3uY36I7xhbDHYLJqsB1FWeAk8rwyzYx1O32UyGNQ";

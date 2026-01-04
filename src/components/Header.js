@@ -11,12 +11,14 @@ import { removeUser } from "../utils/store/userSlice";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser } from "../utils/store/userSlice";
+import { toggleGptSearch } from "../utils/store/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const loggedInUser = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gptSearch.showGptSearch);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (User) => {
@@ -42,6 +44,10 @@ const Header = () => {
     };
   }, []);
 
+  const gptSearchClickHandler = () => {
+    dispatch(toggleGptSearch());
+  };
+
   const handleSignout = () => {
     // Sign out logic can be added here
     signOut(auth)
@@ -59,6 +65,12 @@ const Header = () => {
       <img className="w-44" src={LOGO_URL} alt="Netflix Logo" />
       {loggedInUser && (
         <div className="flex items-center space-x-4 text-white">
+          <button
+            className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition duration-300"
+            onClick={gptSearchClickHandler}
+          >
+            {showGptSearch ? "Home" : "Search Movies"}
+          </button>
           <img
             className="w-12 h-12"
             src={loggedInUser.photoURL || USER_PROFILE_URL}
