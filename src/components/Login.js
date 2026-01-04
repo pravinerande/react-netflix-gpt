@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
-import { BACKGROUND_IMAGE_URL } from "../utils/constants";
+import {
+  BACKGROUND_IMAGE_URL,
+  USER_AVTAR,
+  USER_DUMMY_NAME,
+} from "../utils/constants";
 import { checkValidData } from "../utils/validation";
 import {
   createUserWithEmailAndPassword,
@@ -9,8 +13,6 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addUser } from "../utils/store/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -21,7 +23,6 @@ const Login = () => {
   const fullName = useRef(null);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
     // Logic to toggle to signup form
@@ -43,11 +44,6 @@ const Login = () => {
 
     // further logic for sign in or sign up can be added here
     if (isSignInForm) {
-      console.log(
-        "Signing In with",
-        email.current.value,
-        password.current.value
-      );
       // Sign In Logic
       signInWithEmailAndPassword(
         auth,
@@ -57,32 +53,16 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log("User signed in:", user);
-
-          // dispatch(
-          //   addUser({
-          //     uid: user.uid,
-          //     email: user.email,
-          //     displayName: user.displayName,
-          //     photoURL: user.photoURL,
-          //   })
-          // );
+          console("created user-", user);
 
           navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log("Error during sign in:", errorCode, errorMessage);
           setErrorMsg(errorCode + "-" + errorMessage);
         });
     } else {
-      console.log(
-        "Signing Up with",
-        email.current.value,
-        password.current.value,
-        fullName.current.value.fullName
-      );
       // Sign up logic can be added here
       createUserWithEmailAndPassword(
         auth,
@@ -92,19 +72,9 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log("User created:", user);
-          // dispatch(
-          //   addUser({
-          //     uid: user.uid,
-          //     email: user.email,
-          //     displayName: fullName.current.value,
-          //     photoURL: user.photoURL,
-          //   })
-          // );
           updateUserProfile(user, fullName.current.value);
         })
         .catch((error) => {
-          console.log("Error during sign up:", error);
           setErrorMsg(error.message);
         });
     }
@@ -112,15 +82,13 @@ const Login = () => {
 
   const updateUserProfile = (user, name) => {
     updateProfile(user, {
-      displayName: name || "Random User",
-      photoURL: "https://avatars.githubusercontent.com/u/6948496?v=4",
+      displayName: name || USER_DUMMY_NAME,
+      photoURL: USER_AVTAR,
     })
       .then(() => {
-        console.log("User profile updated successfully");
         navigate("/browse");
       })
       .catch((error) => {
-        console.log("Error updating user profile:", error);
         setErrorMsg(error.message);
       });
   };
@@ -135,7 +103,7 @@ const Login = () => {
         />
       </div>
       <form
-        className="absolute w-4/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 p-8 my-8 rounded-md"
+        className="absolute w-3/12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-70 p-8 my-8 rounded-md"
         onSubmit={handleFormSubmit}
       >
         <h2 className="text-3xl font-bold mb-8 text-white">
