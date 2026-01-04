@@ -13,3 +13,19 @@
  - Netflix GPT
   - search bar
   - suggestions
+
+
+ # Project flow as progress
+  - Create react app - npx creat-react-app
+  - Tailwind css integration to project - official dccs for react
+  - Routing setoup - react rout dom
+  - header, body pages creation & configure
+  - login/signup page
+  - validation on login form
+  - useRef hooks for form fields
+  - Firebase setup - google account like app creation
+  - firebase deployment
+  - firebase API - create/login
+  - redux setup - logged user
+  - Update user
+  - sign out

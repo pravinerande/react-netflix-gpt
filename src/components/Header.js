@@ -1,11 +1,48 @@
+import { LOGO_URL, USER_PROFILE_URL } from "../utils/constants";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../utils/store/userSlice";
+
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const loggedInUser = useSelector((store) => store.user);
+
+  const handleSignout = () => {
+    // Sign out logic can be added here
+    signOut(auth)
+      .then(() => {
+        dispatch(removeUser());
+        navigate("/login");
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
+  };
+
   return (
-    <div className="absolute px-8 py-2 bg-gradient-to-b from-black via-black to-transparent w-full flex items-center">
-      <img
-        className="w-44"
-        src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-12-03/consent/87b6a5c0-0104-4e96-a291-092c11350111/019ae4b5-d8fb-7693-90ba-7a61d24a8837/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="Netflix Logo"
-      />
+    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+      <img className="w-44" src={LOGO_URL} alt="Netflix Logo" />
+      {loggedInUser && (
+        <div className="flex items-center space-x-4 text-white">
+          <img
+            className="w-12 h-12"
+            src={loggedInUser.photoURL || USER_PROFILE_URL}
+            alt="User profile"
+          />
+          <div className="flex flex-col items-center space-x-4">
+            <span className="text-white ">
+              {loggedInUser.displayName || "No Name"}
+            </span>
+            <button className="text-white" onClick={handleSignout}>
+              Sign Out
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
