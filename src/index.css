@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  overflow-x: hidden;
+}
+
+/* Hide horizontal (x-axis) scrollbar by default, show on hover, prevent y-axis scroll */
+.custom-scrollbar-on-hover {
+  overflow-y: hidden !important;
+  overflow-x: auto !important;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.custom-scrollbar-on-hover::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+  height: 0px;
+}
+.custom-scrollbar-on-hover:hover {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #222;
+}
+.custom-scrollbar-on-hover:hover::-webkit-scrollbar {
+  display: block;
+  height: 8px;
+  background: #222;
+}
+.custom-scrollbar-on-hover:hover::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}

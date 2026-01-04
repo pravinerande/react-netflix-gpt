@@ -33,3 +33,5 @@
 - TMDB app registration & API data loading
 - Movies get API, Custom hooks, Redux store with Moview list & movie trailer
 - Youtube video integration
+- Build Secondary component
+- Movies List with custom hooks & integration
