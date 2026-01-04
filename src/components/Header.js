@@ -1,4 +1,8 @@
-import { LOGO_URL, USER_PROFILE_URL } from "../utils/constants";
+import {
+  LOGO_URL,
+  USER_DUMMY_NAME,
+  USER_PROFILE_URL,
+} from "../utils/constants";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +66,7 @@ const Header = () => {
           />
           <div className="flex flex-col items-center space-x-4">
             <span className="text-white ">
-              {loggedInUser.displayName || "No Name"}
+              {loggedInUser.displayName || USER_DUMMY_NAME}
             </span>
             <button className="text-white" onClick={handleSignout}>
               Sign Out
