@@ -35,3 +35,5 @@
 - Youtube video integration
 - Build Secondary component
 - Movies List with custom hooks & integration
+- Searchbar with OpenAI integration & movie suggestion using TMDB API
+- OpenAI & TMDB combination for search results
